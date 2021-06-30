@@ -1,13 +1,13 @@
-This is a sample Web Application to use during Continuous Integration demos.
+Esta es una aplicacion de ejemplo para Integracion Continua, Politecnico Grancolombiano
 Ivan Barrios Avila
 1510010997
 
-#Build Instruction
+#Instrucciones de construccion
 
 ```
 mvn3 clean package
 ```
 
-#Deploy instruction
+#Instrucciones de despliegue
 
 Deploy ```target/WebApp.war``` on Tomcat

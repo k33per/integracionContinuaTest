@@ -2,7 +2,7 @@
 // Ivan Barrios 1510010997
 
 environment {
-    registry = "k33per/integracionContinua"
+    registry = "k33per/integracioncontinua"
     registryCredential = 'dockerhub'
     dockerImage = ''
 }
