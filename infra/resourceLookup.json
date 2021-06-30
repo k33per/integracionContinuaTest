@@ -1,0 +1,57 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Resource Lookupsuch us vpcid, subnets, arn listener",
+    "Resources": {
+        "VPC": {
+            "Type": "Custom::ResourceLookup",
+            "Version": "1.0",
+            "Properties": {
+              "ServiceToken": {"Fn::Join": [":", ["arn:aws:sns", {"Ref": "AWS::Region"}, "571458333875:custom-resource"] ] },
+              "Resource": "VPC",
+              "VpcEnv": "dev"
+            }
+          },
+          "ELBSubnet01": {
+            "Type": "Custom::ResourceLookup",
+            "Properties": {
+              "Version": "1.0",
+              "Resource": "Subnet",
+              "ServiceToken": {"Fn::Join": [":", ["arn:aws:sns", {"Ref": "AWS::Region"}, "571458333875:custom-resource"] ] },
+              "VpcId": {"Ref":"VPC"},
+              "Name": "private",
+              "Az": "1"
+            }
+          },
+          "ELBSubnet02": {
+            "Type": "Custom::ResourceLookup",
+            "Properties": {
+              "Version": "1.0",
+              "Resource": "Subnet",
+              "ServiceToken": {"Fn::Join": [":", ["arn:aws:sns", {"Ref": "AWS::Region"}, "571458333875:custom-resource"] ] },
+              "VpcId": {"Ref":"VPC"},
+              "Name": "private",
+              "Az": "2"
+            }
+        }
+    },
+    "Outputs": {
+        "VPC": {
+          "Value": {"Ref":"VPC"},
+          "Export": {
+            "Name": "VPC"
+          }
+        },
+        "ELBSubnet01": {
+            "Value": {"Ref":"ELBSubnet01"},
+            "Export": {
+              "Name": "ELBSubnet01"
+            }
+        },
+        "ELBSubnet02": {
+            "Value": {"Ref":"ELBSubnet02"},
+            "Export": {
+              "Name": "ELBSubnet02"
+            }
+        }
+    }   
+}

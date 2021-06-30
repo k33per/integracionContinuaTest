@@ -1,0 +1,32 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "ECS deployment pipeline",
+    "Resources": {
+        "ResourceLookup" : {
+            "Type" : "AWS::CloudFormation::Stack",            
+            "Properties" : {
+                "TemplateURL" : "https://s3.amazonaws.com/test-intContinua-cloudformation/resourceLookup.json"
+            }
+        },
+        "RoleAndPolicies" : {
+            "Type" : "AWS::CloudFormation::Stack",
+            "Properties" : {
+                "TemplateURL" : "https://s3.amazonaws.com/test-intContinua-cloudformation/iam.json"
+            }
+        },
+        "Cluster" : {
+            "DependsOn": "RoleAndPolicies",
+            "Type" : "AWS::CloudFormation::Stack",
+            "Properties" : {
+                "TemplateURL" : "https://s3.amazonaws.com/test-intContinua-cloudformation/cluster.json"
+            }
+        },
+        "api" : {
+            "Type" : "AWS::CloudFormation::Stack",
+            "DependsOn": "Cluster",
+            "Properties" : {
+                "TemplateURL" : "https://s3.amazonaws.com/test-intContinua-cloudformation/api.json"
+            }
+        }
+    }
+}
